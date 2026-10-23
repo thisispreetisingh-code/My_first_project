@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- page:start -->
+<title>Creator Niche Lab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="rec" aria-hidden="true"></span><b>Creator Niche Lab</b><small>YouTube + Instagram · data <span id="updated"></span></small></div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-tab="niches"><span class="step">1</span>Niches</button>
+      <button role="tab" data-tab="channels"><span class="step">2</span>Channels</button>
+      <button role="tab" data-tab="studio"><span class="step">3</span>Content Studio</button>
+      <button role="tab" data-tab="remix"><span class="step">4</span>Remix Playbook</button>
+      <button role="tab" data-tab="analyze"><span class="step">5</span>Analyze my channel</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 1. Niches -->
+  <section class="pane" id="pane-niches">
+    <div class="intro">
+      <div class="eyebrow">Step 1 · Pick a niche</div>
+      <h2>Five niches that perform well and can pay within 30–90 days</h2>
+      <p>Ranked on platform fit, ad rates (RPM), and how fast a consistent new creator can reach the first payout. Click a row to see how it earns, sub-niches with less competition, and a 90-day plan.</p>
+    </div>
+    <div class="filters" id="niche-filters">
+      <span class="label">Sort by fit</span>
+      <button class="chip" data-k="platform" data-v="all" aria-pressed="true">Both</button>
+      <button class="chip" data-k="platform" data-v="yt" aria-pressed="false">YouTube</button>
+      <button class="chip" data-k="platform" data-v="ig" aria-pressed="false">Instagram</button>
+      <span class="label" style="margin-left:10px">Can monetize from</span>
+      <button class="chip" data-k="speed" data-v="all" aria-pressed="true">Any</button>
+      <button class="chip" data-k="speed" data-v="30" aria-pressed="false">30 days</button>
+      <button class="chip" data-k="speed" data-v="45" aria-pressed="false">45 days</button>
+      <button class="chip" data-k="speed" data-v="60" aria-pressed="false">60 days</button>
+      <button class="chip" data-k="faceless" data-v="1" aria-pressed="false">Faceless only</button>
+    </div>
+    <div class="board">
+      <table>
+        <thead><tr><th>Niche</th><th>YouTube</th><th>Instagram</th><th>Est. RPM</th><th>Days to monetize <div class="timeline-scale"><span>0</span><span>30</span><span>60</span><span>90</span><span>120</span></div></th><th>Face</th><th>Competition</th></tr></thead>
+        <tbody id="niche-rows"></tbody>
+      </table>
+    </div>
+    <div class="detail" id="niche-detail"></div>
+  </section>
+
+  <!-- 2. Channels -->
+  <section class="pane" id="pane-channels" hidden>
+    <div class="intro">
+      <div class="eyebrow">Step 2 · Study who's winning</div>
+      <h2>Channels to model, and how to beat them</h2>
+      <p>For each channel: why it works, the format you can borrow, how to make yours better, and what the creator is really optimising for. <span id="chan-count"></span> listed.</p>
+    </div>
+    <div class="filters" id="chan-filters"></div>
+    <div class="cards" id="chan-cards"></div>
+    <p class="note">Sizes are approximate lower bounds as of late 2026. Search links open YouTube or Google so you always land on the current page.</p>
+  </section>
+
+  <!-- 3. Studio -->
+  <section class="pane" id="pane-studio" hidden>
+    <div class="intro">
+      <div class="eyebrow">Step 3 · Make the content</div>
+      <h2>Content Studio</h2>
+      <p>Choose a niche and type your video topic. You get titles, captions, a description, hashtags, keywords and script outlines built from the patterns the top channels use.</p>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label for="st-niche">Niche</label><select id="st-niche"></select></div>
+      <div class="field" style="grid-column:span 2"><label for="st-topic">Your video topic</label><input id="st-topic" type="text" autocomplete="off"></div>
+    </div>
+    <div class="studio-grid">
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><div class="eyebrow">Generated</div><span class="note" id="st-out-title"></span></div>
+        <div class="subtabs" id="st-view" data-view="titles">
+          <button class="chip" data-v="titles">Titles</button>
+          <button class="chip" data-v="scripts">Scripts</button>
+          <button class="chip" data-v="captions">Captions</button>
+          <button class="chip" data-v="description">Description</button>
+          <button class="chip" data-v="hashtags">Hashtags</button>
+          <button class="chip" data-v="keywords">Keywords</button>
+        </div>
+        <div class="out" id="st-out"></div>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">Proven ideas in this niche</div>
+        <div id="st-ideas"></div>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">Editing style that works here</div>
+        <ul class="list" id="st-editing"></ul>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">My idea board</div>
+        <div class="out" id="st-saved"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Remix -->
+  <section class="pane" id="pane-remix" hidden>
+    <div class="intro">
+      <div class="eyebrow">Step 4 · Copy the format, not the video</div>
+      <h2>Remix Playbook</h2>
+      <p>Top creators all borrow formats from each other. The ones who grow add something the original didn't have. Use this to turn a video that's working for someone else into your own, better version.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Find a proven video</b><p>Pick an outlier: a video with 3× more views than that channel's average.</p></li>
+      <li><b>Decode why it worked</b><p>Note the topic, title pattern, thumbnail idea, hook and pacing.</p></li>
+      <li><b>Choose your motive</b><p>Reach, ad revenue, affiliate, product or brand deals. It decides your CTA and length.</p></li>
+      <li><b>Pick 1–2 improvement levers</b><p>Localise, update, test it yourself, simplify, go deeper.</p></li>
+      <li><b>Make it 100% yours</b><p>Your script, footage, voice and thumbnail. Then compare results after 48 hours.</p></li>
+    </ol>
+    <div class="detail">
+      <div class="panel">
+        <div class="eyebrow">Build a remix</div>
+        <div class="form-grid">
+          <div class="field" style="grid-column:1/-1"><label for="rmx-title">Video or format you want to remix</label><input id="rmx-title" type="text" value="5 AI tools that replace a full-time assistant"></div>
+          <div class="field"><label for="rmx-niche">Niche</label><select id="rmx-niche"></select></div>
+          <div class="field"><label for="rmx-format">Your format</label><select id="rmx-format"><option value="short">Short / Reel</option><option value="long">Long-form</option></select></div>
+          <div class="field"><label for="rmx-audience">Your audience</label><input id="rmx-audience" type="text" value="college students in India"></div>
+          <div class="field"><label for="rmx-motive">Your motive</label><select id="rmx-motive"></select></div>
+        </div>
+        <h4>Improvement levers</h4>
+        <div class="levers" id="rmx-levers"></div>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">Red lines</div>
+        <p>These keep your channel monetizable:</p>
+        <ul class="list redlines warn-box" id="rmx-redlines"></ul>
+      </div>
+    </div>
+    <div class="detail" id="rmx-out"></div>
+  </section>
+
+  <!-- 5. Analyze -->
+  <section class="pane" id="pane-analyze" hidden>
+    <div class="intro">
+      <div class="eyebrow">Step 5 · Check your own channel</div>
+      <h2>Analyze my channel</h2>
+      <p>Enter numbers from YouTube Studio (Analytics → last 28 days) or Instagram's Professional Dashboard. You'll get a health score, what to fix, and how many days you are from each monetization tier. <span class="sample-flag">Example numbers loaded</span></p>
+    </div>
+    <div class="filters" id="an-platform">
+      <button class="chip" data-v="yt" aria-pressed="true">YouTube</button>
+      <button class="chip" data-v="ig" aria-pressed="false">Instagram</button>
+    </div>
+
+    <div id="an-yt" class="pane">
+      <form class="panel" id="yt-form">
+        <div class="form-grid">
+          <div class="field"><label for="yt-niche">Niche</label><select id="yt-niche"></select></div>
+          <div class="field"><label for="yt-subs">Subscribers</label><input id="yt-subs" type="number" min="0" value="640"></div>
+          <div class="field"><label for="yt-hours">Watch hours (last 12 months)</label><input id="yt-hours" type="number" min="0" value="1850"></div>
+          <div class="field"><label for="yt-shorts">Shorts views (last 90 days)</label><input id="yt-shorts" type="number" min="0" value="420000"></div>
+          <div class="field"><label for="yt-subs28">New subscribers (28 days)</label><input id="yt-subs28" type="number" min="0" value="180"></div>
+          <div class="field"><label for="yt-hours28">Watch hours gained (28 days)</label><input id="yt-hours28" type="number" min="0" value="410"></div>
+          <div class="field"><label for="yt-shorts28">Shorts views (28 days)</label><input id="yt-shorts28" type="number" min="0" value="160000"></div>
+          <div class="field"><label for="yt-uploads">Uploads per week</label><input id="yt-uploads" type="number" min="0" step="0.5" value="3"></div>
+          <div class="field"><label for="yt-avgviews">Avg views per long video</label><input id="yt-avgviews" type="number" min="0" value="380"></div>
+          <div class="field"><label for="yt-ctr">Impressions CTR %</label><input id="yt-ctr" type="number" min="0" step="0.1" value="4.6"></div>
+          <div class="field"><label for="yt-avd">Average % viewed</label><input id="yt-avd" type="number" min="0" max="100" value="38"></div>
+        </div>
+        <details>
+          <summary class="note" style="cursor:pointer">Optional: load public stats with a YouTube Data API key</summary>
+          <div class="form-grid" style="margin-top:10px">
+            <div class="field"><label for="yt-key">API key</label><input id="yt-key" type="password" autocomplete="off" placeholder="AIza…"></div>
+            <div class="field"><label for="yt-handle">Channel handle</label><input id="yt-handle" type="text" placeholder="@yourchannel"></div>
+            <div class="field" style="align-content:end"><button class="btn ghost" type="button" id="yt-fetch">Load public stats</button></div>
+          </div>
+          <p class="note" id="yt-fetch-msg">Your key stays in this browser and is only sent to Google.</p>
+        </details>
+      </form>
+      <div class="detail" id="yt-out"></div>
+    </div>
+
+    <div id="an-ig" class="pane" hidden>
+      <form class="panel" id="ig-form">
+        <div class="form-grid">
+          <div class="field"><label for="ig-followers">Followers</label><input id="ig-followers" type="number" min="0" value="3200"></div>
+          <div class="field"><label for="ig-gained28">New followers (28 days)</label><input id="ig-gained28" type="number" min="0" value="420"></div>
+          <div class="field"><label for="ig-reelviews">Avg Reel views</label><input id="ig-reelviews" type="number" min="0" value="2600"></div>
+          <div class="field"><label for="ig-likes">Avg likes per post</label><input id="ig-likes" type="number" min="0" value="95"></div>
+          <div class="field"><label for="ig-comments">Avg comments per post</label><input id="ig-comments" type="number" min="0" value="8"></div>
+          <div class="field"><label for="ig-saves">Avg saves + shares</label><input id="ig-saves" type="number" min="0" value="22"></div>
+          <div class="field"><label for="ig-posts">Posts per week</label><input id="ig-posts" type="number" min="0" value="4"></div>
+        </div>
+      </form>
+      <div class="detail" id="ig-out"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Thresholds and RPMs are estimates from public sources; YouTube Studio and Instagram's Professional Dashboard have the final word. Time-to-monetize assumes daily short-form plus 2 long videos a week and is not a guarantee.</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<!-- page:end -->
+</body>
+</html>
